@@ -153,6 +153,9 @@ module Celluloid
 
     def start
       actor_system.start
+
+      visualize = Celluloid::MonitoringConsole.new
+      visualize.async.start
     end
 
     def running?
@@ -182,6 +185,7 @@ module Celluloid
     # Shut down all running actors
     def shutdown
       actor_system.shutdown
+      
     end
 
     def version
@@ -501,6 +505,8 @@ require "celluloid/actor/system"
 require "celluloid/actor/manager"
 
 require "celluloid/deprecate" unless $CELLULOID_BACKPORTED == false
+
+require "celluloid/monitoring_console"
 
 $CELLULOID_MONITORING = false
 Celluloid::Notices.output

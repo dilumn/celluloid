@@ -35,7 +35,7 @@ module Celluloid
         root_services
       end
 
-      attr_reader :registry, :group
+      attr_reader :registry, :group, :actors
 
       # the root of the supervisor tree is established at supervision/root
 
