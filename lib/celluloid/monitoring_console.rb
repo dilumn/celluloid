@@ -11,7 +11,8 @@ module Celluloid
 		end
 
 		def start
-			Reel::Server::HTTP.run('127.0.0.1', 3000) do |connection|
+			Reel::Server::HTTP.run('0.0.0.0', 3000) do |connection|
+				puts "open"
 				connection.each_request do |request|
 					case request.path
 					when "/actorsTasks"
