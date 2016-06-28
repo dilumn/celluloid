@@ -5,6 +5,7 @@ require "set"
 
 $CELLULOID_DEBUG = false
 $CELLULOID_MANAGED ||= false
+$CELLULOID_CONSOLE ||= false
 
 require "celluloid/version"
 require "celluloid/notices"
@@ -154,8 +155,10 @@ module Celluloid
     def start
       actor_system.start
 
-      visualize = Celluloid::MonitoringConsole.new
-      visualize.async.start
+      if $CELLULOID_CONSOLE
+        visualize = Celluloid::MonitoringConsole.new
+        visualize.async.start
+      end
     end
 
     def running?
@@ -506,7 +509,7 @@ require "celluloid/actor/manager"
 
 require "celluloid/deprecate" unless $CELLULOID_BACKPORTED == false
 
-require "celluloid/monitoring_console"
+require "celluloid/monitoring_console" if $CELLULOID_CONSOLE
 
 $CELLULOID_MONITORING = false
 Celluloid::Notices.output
